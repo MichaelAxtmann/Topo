@@ -9,7 +9,11 @@ Topo is implemented in C.
 
 To build and link with Topo, the following are required.
 
-- 64-bit x86-compatible processor
+- 64-bit x86-compatible processor with support for AVX instructions
+  
+  Topo has been tested with Intel processors of the Sandy Bridge generation and newer.
+  Non-Intel processors may also be compatible if they support the required instructions.
+  Do not attempt to use it on older-generation processors, at the risk of encountering "Illegal Instruction" errors.
   
 - Windows 10 Pro or Ubuntu 14.04
   
