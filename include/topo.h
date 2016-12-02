@@ -31,6 +31,12 @@ hwloc_topology_t topoGetSystemTopologyObject(void);
 /// @return NUMA node object handle from `hwloc`, or `NULL` in the event of a failure (object does not exist, instantiation failure, etc.).
 hwloc_obj_t topoGetNUMANodeObjectAtIndex(uint32_t numaNodeIndex);
 
+/// Retrieves the OS index of the NUMA node at the specified `hwloc` index.
+/// The OS uses a potentially different index to identify each NUMA node than does `hwloc`.
+/// @param [in] numaNodeIndex `hwloc` index of the NUMA node of interest.
+/// @return OS index for the NUMA node, or a negative value in the event of a failure (NUMA node does not exist, etc.).
+int32_t topoGetNUMANodeOSIndex(uint32_t numaNodeIndex);
+
 /// Destroys and frees all system resources held to maintain the `hwloc` system topology.
 /// This function is idempotent and can be invoked anytime outside of a code region parallelized by this library.
 void topoDestroySystemTopologyObject(void);

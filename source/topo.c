@@ -65,6 +65,25 @@ hwloc_obj_t topoGetNUMANodeObjectAtIndex(uint32_t numaNodeIndex)
 
 // --------
 
+int32_t topoGetNUMANodeOSIndex(uint32_t numaNodeIndex)
+{
+    int32_t numaNodeOSIndex = -1;
+    hwloc_obj_t numaNodeObject = topoGetNUMANodeObjectAtIndex(numaNodeIndex);
+    
+    if (NULL != numaNodeObject)
+    {
+        // In some cases a single-node machine has no NUMA node object, so ensure to return 0 in that case.
+        if (1 == hwloc_bitmap_weight(numaNodeObject->nodeset))
+            numaNodeOSIndex = numaNodeObject->os_index;
+        else
+            numaNodeOSIndex = 0;
+    }
+    
+    return numaNodeOSIndex;
+}
+
+// --------
+
 void topoDestroySystemTopologyObject(void)
 {
     if (NULL != topoSystemTopology)
