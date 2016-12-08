@@ -13,6 +13,7 @@
 #pragma once
 
 #include <hwloc.h>
+#include <stdint.h>
 
 
 // -------- FUNCTIONS ------------------------------------------------------ //
