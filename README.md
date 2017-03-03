@@ -1,5 +1,5 @@
 Topo is a multi-platform system topology abstraciton library for x86-based systems containing one or more NUMA nodes.
-It is intended as a wrapper around the `hwloc` library to provide helper functions for other libraries that might use it.
+It is intended as a wrapper around the hwloc library to provide helper functions for other libraries that might use it.
 Furthermore, it exposes a single read-only instance of the system-topology so that libraries that query the topology do not need separate instances.
 
 Topo is implemented in C.
@@ -41,7 +41,7 @@ To build on Linux, just type `make` from within the repository directory.
 
 Projects that make use of Topo should include the top-level topo.h header file and nothing else.
 
-Assuming a Linux-based C-language project that uses Topo and consists of a single source file called `main.c`, the following command would build and link with Topo.
+Assuming a Linux-based C-language project that uses Topo and consists of a single source file called "main.c", the following command would build and link with Topo.
 
     gcc main.c -ltopo -lhwloc -lnuma -lpciaccess -lxml2
 
@@ -53,8 +53,8 @@ It covers both the external API in topo.h and Topo's internals, the latter being
 
 On Linux, type `make docs` to compile the documentation. On Windows, run the Doxygen tool using the repository directory as the working directory (it may be necessary to create the output directory manually first).
 
-The primary purpose of Topo is to provide helper functions for supporting other libraries that use `hwloc`.
-Only a few external function calls are made available; the `hwloc` documentation is the best source of information on how to interact with the objects Topo exposes.
+The primary purpose of Topo is to provide helper functions for supporting other libraries that use hwloc.
+Only a few external function calls are made available; the hwloc documentation is the best source of information on how to interact with the objects Topo exposes.
 Note, however, that the objects Topo exposes should not be modified in place. They may, however, be duplicated and the duplicates modified however needed.
 
 
