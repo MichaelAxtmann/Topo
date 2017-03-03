@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FF0BBE08-D354-46D5-B0D2-F5739DCF20A8}</ProjectGuid>
-    <RootNamespace>topo</RootNamespace>
+    <RootNamespace>Topo</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
