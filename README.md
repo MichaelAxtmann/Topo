@@ -62,5 +62,5 @@ Note, however, that the objects Topo exposes should not be modified in place. Th
 
 Topo is licensed under BSD 3-clause (see "LICENSE" in the top-level source code directory).
 
-Copyright (c) 2016 Stanford University, Department of Electrical Engineering.
+Copyright (c) 2016-2017 Stanford University, Department of Electrical Engineering.
 Authored by Samuel Grossman.
