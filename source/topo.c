@@ -10,7 +10,7 @@
  *   Implementation of all external API functions.
  *****************************************************************************/
 
-#include "../topo.h"
+#include "topo.h"
 
 #include <hwloc.h>
 #include <stdlib.h>

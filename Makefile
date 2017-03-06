@@ -17,7 +17,7 @@ PROJECT_NAME                = topo
 PLATFORM_NAME               = linux
 
 SOURCE_DIR                  = source
-INCLUDE_DIR                 = include/$(PROJECT_NAME)
+INCLUDE_DIR                 = include
 
 OUTPUT_BASE_DIR             = output
 OUTPUT_DOCS_DIR             = $(OUTPUT_BASE_DIR)/docs
