@@ -7,7 +7,8 @@
  * Copyright (c) 2016-2017
  *************************************************************************//**
  * @file topo.h
- *   Declaration of all external API functions.
+ *   Declaration of external API functions.
+ *   Top-level header file for this library, to be included externally.
  *****************************************************************************/
 
 #pragma once
@@ -16,30 +17,42 @@
 #include <stdint.h>
 
 
+// -------- VERSION INFORMATION -------------------------------------------- //
+
+/// 32-bit unsigned integer that represents the version of Topo.
+/// Incremented each time a change is made that affects the API.
+/// - Version 1: Initial release.
+#define TOPO_LIBRARY_VERSION                    0x00000001
+
+
 // -------- FUNCTIONS ------------------------------------------------------ //
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/// Retrieves and returns the compiled Topo library version.
+/// @return Topo library version number.
+uint32_t topoGetLibraryVersion(void);
+
+
 /// Retrieves and returns the system topology object handle.
 /// This function will lazily instantiate the system topology object if it is not yet instantiated.
-/// @return System topology object handle from `hwloc`, or `NULL` in the event of an instantiation failure.
+/// @return System topology object handle from hwloc, or `NULL` in the event of an instantiation failure.
 hwloc_topology_t topoGetSystemTopologyObject(void);
 
-/// Retrieves and returns the system topology object that corresponds to the specified NUMA node, by `hwloc` index.
+/// Retrieves and returns the system topology object that corresponds to the specified NUMA node, by hwloc index.
 /// This is useful because some single-node systems lack NUMA node objects entirely.
-/// @param [in] numaNodeIndex `hwloc` index of the NUMA node of interest.
-/// @return NUMA node object handle from `hwloc`, or `NULL` in the event of a failure (object does not exist, instantiation failure, etc.).
+/// @param [in] numaNodeIndex hwloc index of the NUMA node of interest.
+/// @return NUMA node object handle from hwloc, or `NULL` in the event of a failure (object does not exist, instantiation failure, etc.).
 hwloc_obj_t topoGetNUMANodeObjectAtIndex(uint32_t numaNodeIndex);
 
-/// Retrieves the OS index of the NUMA node at the specified `hwloc` index.
-/// The OS uses a potentially different index to identify each NUMA node than does `hwloc`.
-/// @param [in] numaNodeIndex `hwloc` index of the NUMA node of interest.
+/// Retrieves the OS index of the NUMA node at the specified hwloc index.
+/// The OS uses a potentially different index to identify each NUMA node than does hwloc.
+/// @param [in] numaNodeIndex hwloc index of the NUMA node of interest.
 /// @return OS index for the NUMA node, or a negative value in the event of a failure (NUMA node does not exist, etc.).
 int32_t topoGetNUMANodeOSIndex(uint32_t numaNodeIndex);
 
-/// Destroys and frees all system resources held to maintain the `hwloc` system topology.
-/// This function is idempotent and can be invoked anytime outside of a code region parallelized by this library.
+/// Destroys and frees all system resources held to maintain the hwloc system topology.
 void topoDestroySystemTopologyObject(void);
 
 /// Retrieves the number of NUMA nodes in the system.
