@@ -43,7 +43,7 @@ Projects that make use of Topo should include the top-level topo.h header file a
 
 Assuming a Linux-based C-language project that uses Topo and consists of a single source file called "main.c", the following command would build and link with Topo.
 
-    gcc main.c -ltopo -lhwloc -lnuma -lpciaccess -lxml2
+    g++ main.c -ltopo -lhwloc -lnuma -lpciaccess -lxml2
 
 
 # Getting Started
