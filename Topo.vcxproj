@@ -82,7 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\topo.c" />
+    <ClCompile Include="source\topo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\topo.h" />

@@ -22,6 +22,7 @@
 /// 32-bit unsigned integer that represents the version of Topo.
 /// Incremented each time a change is made that affects the API.
 /// - Version 1: Initial release.
+/// - Version 2: Removed support for destroying the system topology object.
 #define TOPO_LIBRARY_VERSION                    0x00000001
 
 
@@ -51,9 +52,6 @@ hwloc_obj_t topoGetNUMANodeObjectAtIndex(uint32_t numaNodeIndex);
 /// @param [in] numaNodeIndex hwloc index of the NUMA node of interest.
 /// @return OS index for the NUMA node, or a negative value in the event of a failure (NUMA node does not exist, etc.).
 int32_t topoGetNUMANodeOSIndex(uint32_t numaNodeIndex);
-
-/// Destroys and frees all system resources held to maintain the hwloc system topology.
-void topoDestroySystemTopologyObject(void);
 
 /// Retrieves the number of NUMA nodes in the system.
 /// NUMA nodes are identified by a zero-based index up to 1 less than the number returned by this function.

@@ -12,16 +12,20 @@
 
 #include "topo.h"
 
+#include <cstdint>
+#include <mutex>
 #include <hwloc.h>
-#include <stdlib.h>
-#include <stdint.h>
 
 
 // -------- LOCALS --------------------------------------------------------- //
 
 /// Holds the `hwloc` system topology object.
-/// Exposes it as a global variable that can be lazily initialized and freed whenever required.
+/// Exposes it as a global variable that is lazily initialized.
+/// Once created, it persists and is read-only throughout the application execution.
 static hwloc_topology_t topoSystemTopology = NULL;
+
+/// Used to ensure thread-safety during lazy instantiation of the `hwloc` system topology object.
+static std::mutex topoSystemTopologyLock;
 
 
 // -------- FUNCTIONS ------------------------------------------------------ //
@@ -38,12 +42,25 @@ hwloc_topology_t topoGetSystemTopologyObject(void)
 {
     if (NULL == topoSystemTopology)
     {
-        // Create and load the hardware topology of the current system.
-        if (0 != hwloc_topology_init(&topoSystemTopology))
-            topoSystemTopology = NULL;
-        
-        if (NULL == topoSystemTopology || 0 != hwloc_topology_load(topoSystemTopology))
-            topoSystemTopology = NULL;
+        // Ensure only a single thread ends up creating the topology object.
+        if (true == topoSystemTopologyLock.try_lock())
+        {
+            // Create and load the hardware topology of the current system.
+            if (0 != hwloc_topology_init(&topoSystemTopology))
+                topoSystemTopology = NULL;
+
+            if (NULL == topoSystemTopology || 0 != hwloc_topology_load(topoSystemTopology))
+                topoSystemTopology = NULL;
+
+            topoSystemTopologyLock.unlock();
+        }
+        else
+        {
+            // Another thread has found the topology object to be uninitialized and has started creating it.
+            // Wait for it to release the lock, then return whatever value it wrote for the topology object.
+            // If it encountered an error, it will have written NULL.
+            std::lock_guard<std::mutex> waitForTopologyLoad(topoSystemTopologyLock);
+        }
     }
     
     return topoSystemTopology;
@@ -89,17 +106,6 @@ int32_t topoGetNUMANodeOSIndex(uint32_t numaNodeIndex)
     }
     
     return numaNodeOSIndex;
-}
-
-// --------
-
-void topoDestroySystemTopologyObject(void)
-{
-    if (NULL != topoSystemTopology)
-    {
-        hwloc_topology_destroy(topoSystemTopology);
-        topoSystemTopology = NULL;
-    }
 }
 
 // --------

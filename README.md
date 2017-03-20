@@ -2,7 +2,7 @@ Topo is a multi-platform system topology abstraciton library for x86-based syste
 It is intended as a wrapper around the hwloc library to provide helper functions for other libraries that might use it.
 Furthermore, it exposes a single read-only instance of the system-topology so that libraries that query the topology do not need separate instances.
 
-Topo is implemented in C.
+Topo is implemented in C++.
 
 
 # Requirements
