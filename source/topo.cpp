@@ -6,7 +6,7 @@
  * Department of Electrical Engineering, Stanford University
  * Copyright (c) 2016-2017
  *************************************************************************//**
- * @file topo.c
+ * @file topo.cpp
  *   Implementation of all external API functions.
  *****************************************************************************/
 
