@@ -31,13 +31,6 @@ static std::mutex topoSystemTopologyLock;
 // -------- FUNCTIONS ------------------------------------------------------ //
 // See "topo.h" for documentation.
 
-uint32_t topoGetLibraryVersion(void)
-{
-    return TOPO_LIBRARY_VERSION;
-}
-
-// --------
-
 hwloc_topology_t topoGetSystemTopologyObject(void)
 {
     if (NULL == topoSystemTopology)

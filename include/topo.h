@@ -17,24 +17,10 @@
 #include <stdint.h>
 
 
-// -------- VERSION INFORMATION -------------------------------------------- //
-
-/// 32-bit unsigned integer that represents the version of Topo.
-/// Incremented each time a change is made that affects the API.
-/// - Version 1: Initial release.
-/// - Version 2: Removed support for destroying the system topology object.
-#define TOPO_LIBRARY_VERSION                    0x00000001
-
-
 // -------- FUNCTIONS ------------------------------------------------------ //
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/// Retrieves and returns the compiled Topo library version.
-/// @return Topo library version number.
-uint32_t topoGetLibraryVersion(void);
-
 
 /// Retrieves and returns the system topology object handle.
 /// This function will lazily instantiate the system topology object if it is not yet instantiated.
